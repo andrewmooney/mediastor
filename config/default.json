@@ -1,0 +1,15 @@
+{
+    "App": {
+        "server": {
+            "port": 8080
+        },
+        "mediastor": {
+            "apiHost": "http://localhost:8080"
+        },
+        "dbConfig": {
+            "host": "localhost",
+            "port": 27017,
+            "database": "mediastor"
+        }
+    }
+}

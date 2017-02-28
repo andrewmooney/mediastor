@@ -1,0 +1,5 @@
+documents/*
+node_modules/
+uploads/*
+video/*
+.DS_Store

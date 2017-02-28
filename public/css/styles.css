@@ -1,0 +1,6 @@
+body, html {
+    min-height: 100%;
+}
+#uploader {
+    margin-top: 50px;
+}
