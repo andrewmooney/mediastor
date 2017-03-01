@@ -41,6 +41,7 @@ app.get('/upload', (req, res) => {
     File is then passed to mantaFileUploader.
     manataFileUploader returns a boolean for completed status.
     If completed is true a patch request is sent to the api to update the availability field.
+    Remove file from local uploads folder. 
 */
 app.post('/', uploads.single('file'), (req, res, next) => {
     console.log(req.file);
