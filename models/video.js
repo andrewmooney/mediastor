@@ -12,7 +12,8 @@ const VideoSchema = new Schema({
         license: { type: String, required: false },
         format: { type: String, required: false },
         available: { type: String, default: false },
-        size: ({ type: Number, required: false })
+        size: ({ type: Number, required: false }),
+        duration: ({ type: Number, required: false})
 });
 
 VideoSchema.pre('save', (next) => {

@@ -25,7 +25,7 @@ module.exports = (app) => {
     });
 
     app.patch('/videos/:id', (req, res) => {
-        Video.update({_id: req.params.id}, { $set: { available: req.body.uploaded, mediastorName: req.body.mediastorName }}, (err, result) => {
+        Video.update({_id: req.params.id}, { $set: { available: req.body.uploaded, mediastorName: req.body.mediastorName, duration: req.body.duration }}, (err, result) => {
             if (err) throw err;
             return res.status(200).json({ message: result });
         });

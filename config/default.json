@@ -4,7 +4,27 @@
             "port": 8080
         },
         "mediastor": {
-            "apiHost": "http://localhost:8080"
+            "apiHost": "http://localhost:8080",
+            "types": {
+                "mp4": "video",
+                "mov": "video",
+                "mpeg": "video",
+                "avi": "video",
+                "mj2": "video",
+                "wav": "audio",
+                "mp3": "audio",
+                "aiff": "audio",
+                "jpg": "image",
+                "jpeg": "image",
+                "tiff": "image",
+                "tif": "image",
+                "raw": "image",
+                "psd": "image",
+                "txt": "document",
+                "doc": "document",
+                "docx": "document",
+                "pdf": "document"
+            }
         },
         "dbConfig": {
             "host": "localhost",

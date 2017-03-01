@@ -5,17 +5,26 @@ const fs = require('fs'),
 
 
 module.exports = (upload, callback) => {
-    let dirs = { 
-        mp4: "videos", 
-        mov: "videos", 
-        mpeg: "videos", 
-        avi: "videos",
-        jpg: "images", 
-        jpeg: "images", 
-        txt: "documents",
-        doc: "documents", 
-        docx: "documents",
-        pdf: "documents" 
+
+    let types = { 
+        mp4: "video", 
+        mov: "video", 
+        mpeg: "video", 
+        avi: "video",
+        mj2: "video",
+        wav: "audio",
+        mp3: "audio",
+        aiff: "audio",
+        jpg: "image", 
+        jpeg: "image", 
+        tiff: "image",
+        tif: "image",
+        raw: "image",
+        psd: "image",
+        txt: "document",
+        doc: "document", 
+        docx: "document",
+        pdf: "document" 
     };
 
     const filename = upload.filename,
@@ -24,7 +33,8 @@ module.exports = (upload, callback) => {
     ext = upload.originalname.split('.').slice(-1)[0],
     basePath = '/uqamoon1/public/',
     stream = new MemoryStream(),
-    uploadPath = basePath + dirs[ext] + '/' + fileId + '.' + ext;
+    uploadPath = basePath + types[ext] + 's' + '/' + fileId + '.' + ext;
+
 
         fs.readFile(localPath, (err, file) => {
             if (err) throw err;
