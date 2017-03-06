@@ -1,5 +1,5 @@
-const mongoose = require('mongoose'),
-    Image = require('../models/image');
+import mongoose from 'mongoose';
+import Image from '../models/image';
 
 module.exports = (app) => {
     app.get('/images', (req, res) => {

@@ -15,8 +15,8 @@ const ModelSchema = new Schema({
         size: ({ type: Number, required: false })
 });
 
-ModelSchema.pre('save', (next) => {
-    now = new Date();
+ModelSchema.pre('save', function (next) {
+    let now = new Date();
     if(!this.uploadedAt) {
         this.uploadedAt = now;
     };

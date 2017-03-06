@@ -13,11 +13,12 @@ const VideoSchema = new Schema({
         format: { type: String, required: false },
         available: { type: String, default: false },
         size: ({ type: Number, required: false }),
-        duration: ({ type: Number, required: false})
+        duration: ({ type: Number, required: false }),
+        fileLocation: ({ type: String, required: false })
 });
 
-VideoSchema.pre('save', (next) => {
-    now = new Date();
+VideoSchema.pre('save', function (next) {
+    const now = new Date();
     if(!this.uploadedAt) {
         this.uploadedAt = now;
     };

@@ -15,8 +15,8 @@ const ImageSchema = new Schema({
         size: ({ type: Number, required: false })
 });
 
-ImageSchema.pre('save', (next) => {
-    now = new Date();
+ImageSchema.pre('save', function (next) {
+    let now = new Date();
     if(!this.uploadedAt) {
         this.uploadedAt = now;
     };

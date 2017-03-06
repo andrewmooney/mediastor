@@ -1,5 +1,5 @@
-const manta = require('manta'),
-      fs = require('fs');
+import manta from 'manta';
+import fs from 'fs';
 
 module.exports = manta.createClient({
     sign: manta.privateKeySigner({

@@ -1,7 +1,7 @@
-const fs = require('fs'),
-    client = require('../manta/mantaClient'),
-    crypto = require('crypto'),
-    MemoryStream = require('memorystream');
+import fs from 'fs';
+import client from '../manta/mantaClient';
+import crypto from 'crypto';
+import MemoryStream from 'memorystream';
 
 
 module.exports = (upload, callback) => {
@@ -38,7 +38,7 @@ module.exports = (upload, callback) => {
 
         fs.readFile(localPath, (err, file) => {
             if (err) throw err;
-            opts = {
+            const opts = {
                 copies: 3,
                 headers: {
                     'access-control-allow-origin': '*',
@@ -52,7 +52,7 @@ module.exports = (upload, callback) => {
 
             stream.pipe(w);
             w.once('close', (res) => {
-                callback(res.complete);
+                callback(res.complete, uploadPath);
             });
             stream.end(file);
         });
