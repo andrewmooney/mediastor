@@ -1,34 +1,39 @@
-import mongoose from 'mongoose';
 import Video from '../models/video';
 
 module.exports = (app) => {
     app.get('/videos', (req, res) => {
         Video.find((err, videos) => {
-           if (err) throw err; 
-            res.status(200).json(videos);
+            if (err) res.status(500).json( { "message": err }); 
+            return res.status(200).json(videos);
         })
     });
 
     app.get('/videos/:id', (req, res) => {
         Video.findById(req.params.id, (err, video) => {
-            if (err) throw err;
-            res.status(200).json(video);
+            if (err) res.status(500).json( { "message": err }); 
+            return res.status(200).json(video);
         });
     });
 
     app.post('/videos', (req, res) => {
         const video = new Video(req.body);
         video.save((err, result) => {
-            if (err) res.json({ message: `There was an error adding the data to the database: ${err}`});
-            console.log(result)
-            return res.status(200).json({ message: result});
+            if (err) res.status(500).json( { "message": err }); 
+            return res.status(201).json({ "message": result });
         });
     });
 
     app.patch('/videos/:id', (req, res) => {
-        Video.update({_id: req.params.id}, { $set: { available: req.body.uploaded, mediastorName: req.body.mediastorName, duration: req.body.duration, fileLocation: req.body.fileLocation }}, (err, result) => {
-            if (err) throw err;
-            return res.status(200).json({ message: result });
+        Video.update({_id: req.params.id}, { $set: req.body }, (err, result) => {
+            if (err) res.status(500).json( { "message": err }); 
+            return res.status(200).json({ "message": result });
+        });
+    });
+
+    app.delete('/videos/:id', (req, res) => {
+        Video.findByIdAndRemove(req.params.id, (err) => {
+            if (err) res.status(500).json( { "message": err }); 
+            return res.status(200).json({ "message": "Video removed from database" })
         });
     });
 };

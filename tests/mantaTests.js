@@ -7,7 +7,19 @@ const fs = require('fs'),
       client = require('../manta/mantaClient'),
       crypto = require('crypto'),
       MemoryStream = require('memorystream'),
-      muploader = require('../manta/mantaFileUploader');
+      muploader = require('../manta/mantaFileUploader'),
+      videoUpload = {
+          _id : "abc123",
+          filename : "testVideo",
+          originalname : "testvideo.mp4" ,
+          path : "./tests/video/testvideo.mp4"
+      },
+      documentUpload = {
+          _id : "abc234",
+          filename : "testDocument",
+          originalname : "testDoc.txt" ,
+          path : "./tests/docs/testDoc.txt"
+      };
 
 
 describe('Create a client object', () => {
@@ -27,10 +39,21 @@ describe('Client should connect to Manta and retrieve information', () => {
     });
 });
 
-describe('Client should upoad a test file to Manta', () => {
+describe('Client should upoad a video test file to Manta', () => {
     it('client should upload testvideo.mp4 to server', (done) => {
-        muploader('./video/testvideo.mp4', (res) => {
+        muploader(videoUpload, (res, uploadPath) => {
             expect(res).to.equal(true);
+            expect(uploadPath).to.equal('/uqamoon1/public/videos/abc123.mp4');
+            done();
+        });
+    });
+});
+
+describe('Client should upoad a document test file to Manta', () => {
+    it('client should upload testDoc.tst to server', (done) => {
+        muploader(documentUpload, (res, uploadPath) => {
+            expect(res).to.equal(true);
+            expect(uploadPath).to.equal('/uqamoon1/public/documents/abc234.txt');
             done();
         });
     });

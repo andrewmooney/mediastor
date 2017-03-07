@@ -12,7 +12,8 @@ const ModelSchema = new Schema({
         license: { type: String, required: false },
         format: { type: String, required: false },
         available: { type: String, default: false },
-        size: ({ type: Number, required: false })
+        size: ({ type: Number, required: false }),
+        fileLocation: ({ type: String, required: false })
 });
 
 ModelSchema.pre('save', function (next) {

@@ -31,4 +31,6 @@ require('./routes/documents')(app);
 
 require('./routes/playlists')(app);
 
-app.listen(serverConfig.port);
+const server = app.listen(serverConfig.port);
+
+module.exports = server;

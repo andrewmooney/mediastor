@@ -20,10 +20,14 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
-    "mocha": "^3.2.0"
+    "chai-http": "^3.0.0",
+    "eslint": "^3.17.1",
+    "mocha": "^3.2.0",
+    "webpack": "^2.2.1"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "test": "mocha --require ./tests/testHelper.js ./tests/ --timeout 50000"
   },
   "keywords": [
     "Media",

@@ -1,4 +1,3 @@
-
 import muploader from '../manta/mantaFileUploader';
 import multer from 'multer';
 import getDuration from 'get-video-duration';
@@ -11,16 +10,14 @@ const uploads = multer({ dest: 'uploads/' });
 /**
  * Route settings
  */
-
-
 module.exports = (app) => {
 
     /**
      * Renders API Documentation page
      */
-     app.get('/', (req, res) => {
-         res.sendFile(path.join(__dirname, '../views', 'index.html'));
-     });
+    app.get('/', (req, res) => {
+        res.sendFile(path.join(__dirname, '../views', 'index.html'));
+    });
 
     /**
      * Renders temporary upload form for testing purposes.
@@ -41,22 +38,34 @@ module.exports = (app) => {
      */
 
     app.post('/', uploads.single('file'), (req, res, next) => {
-        console.log(req.file);
 
         const ext = req.file.originalname.split('.').slice(-1)[0],
-              fileType = app.settings.types[ext],
-              apiHost = app.settings.mediastorConfig.apiHost,
-              uri = `${apiHost}/${fileType}s`;
+            fileType = app.settings.types[ext],
+            apiHost = app.settings.mediastorConfig.apiHost,
+            uri = `${apiHost}/${fileType}s`;
+
+        const deleteTempFile = () => {
+            fs.unlink(req.file.path, (err) => {
+                if (err) throw err;
+            });
+        };
+
+        if (typeof fileType === 'undefined') {
+            deleteTempFile();
+            return res.status(404).json({ "message": `Unfortunatley the ${ext} file type is not yet supported` });
+        }
 
         req.body.type = fileType;
         req.body.size = req.file.size;
         req.body.format = ext;
         let duration = 0;
 
+        /**
+         * If fileType is a video get duration.
+         */
         if (fileType === 'video') {
             getDuration(req.file.path).then((dur) => {
                 duration = dur;
-                console.log(duration);
             });
         }
 
@@ -72,11 +81,8 @@ module.exports = (app) => {
                     req.body.fileLocation = uploadPath;
                     request({ uri: `${uri}/${body.message._id}`, method: 'PATCH', json: req.body }, (err, htmlRes, body) => {
                         if (err) throw err;
-                        fs.unlink(req.file.path, (err) => {
-                            if (err) throw err;
-
-                            return res.status(200).json({ message: "File upload successful" });
-                        });
+                        deleteTempFile();
+                        return res.status(200).json({ message: "File upload successful" });
                     });
                 };
             });

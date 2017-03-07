@@ -35,7 +35,6 @@ module.exports = (upload, callback) => {
     stream = new MemoryStream(),
     uploadPath = basePath + types[ext] + 's' + '/' + fileId + '.' + ext;
 
-
         fs.readFile(localPath, (err, file) => {
             if (err) throw err;
             const opts = {
