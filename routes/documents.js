@@ -19,7 +19,7 @@ module.exports = (app) => {
         const document = new Doc(req.body);
         document.save((err, result) => {
             if (err) return res.status(500).json({ "message": err });
-            return res.status(200).json({ "message": result});
+            return res.status(201).json({ "message": result});
         });
     });
 
@@ -30,10 +30,10 @@ module.exports = (app) => {
         });
     });
 
-    app.delete('/document/:id', (req, res) => {
+    app.delete('/documents/:id', (req, res) => {
         Doc.findByIdAndRemove(req.params.id, (err) => {
             if (err) return res.status(500).json({ "message": err });
-            return res.status(200).json({ "message": "Document deleted" });
+            return res.status(200).json({ "message": "Document removed from database" });
         })
     })
 };

@@ -27,7 +27,7 @@
   },
   "scripts": {
     "start": "node index.js",
-    "test": "mocha --require ./tests/testHelper.js ./tests/ --timeout 50000"
+    "test": "mocha --require ./tests/testHelper.js ./tests/ --timeout 12000"
   },
   "keywords": [
     "Media",

@@ -19,21 +19,21 @@ module.exports = (app) => {
         const image = new Image(req.body);
         image.save((err, result) => {
             if (err) return res.status(500).json( { "message": err });
-            return res.status(200).json({ message: result});
+            return res.status(201).json({ "message": result});
         });
     });
 
     app.patch('/images/:id', (req, res) => {
         Image.update({_id: req.params.id}, { $set: req.body }, (err, result) => {
             if (err) return res.status(500).json( { "message": err });
-            return res.status(200).json({ message: result });
+            return res.status(200).json({ "message": result });
         });
     });
 
     app.delete('/images/:id', (req, res) => {
         Image.findByIdAndRemove(req.params.id, (err) => {
             if (err) return res.status(500).json( { "message": err });
-            return res.status(200).json({ "message": "Image deleted"});
+            return res.status(200).json({ "message": "Image removed from database"});
         })
     })
 };
