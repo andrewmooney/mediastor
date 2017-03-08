@@ -31,7 +31,7 @@ module.exports = (upload, callback) => {
     fileId = upload._id,
     localPath = upload.path,
     ext = upload.originalname.split('.').slice(-1)[0],
-    basePath = '/uqamoon1/public/',
+    basePath = '~~/public/',
     stream = new MemoryStream(),
     uploadPath = basePath + types[ext] + 's' + '/' + fileId + '.' + ext;
 

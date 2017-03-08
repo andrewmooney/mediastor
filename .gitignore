@@ -4,3 +4,5 @@ uploads/*
 video/*
 .DS_Store
 tests/video/*
+tests/docs/*
+tests/images/*

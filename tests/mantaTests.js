@@ -19,6 +19,12 @@ const fs = require('fs'),
           filename : "testDocument",
           originalname : "testDoc.txt" ,
           path : "./tests/docs/testDoc.txt"
+      },
+      imageUpload = {
+          _id : "abc345",
+          filename : "testImage",
+          originalname : "testImage.jpg" ,
+          path : "./tests/images/testImage.jpg"
       };
 
 
@@ -43,7 +49,7 @@ describe('Client should upoad a video test file to Manta', () => {
     it('client should upload testvideo.mp4 to server', (done) => {
         muploader(videoUpload, (res, uploadPath) => {
             expect(res).to.equal(true);
-            expect(uploadPath).to.equal('/uqamoon1/public/videos/abc123.mp4');
+            expect(uploadPath).to.equal('~~/public/videos/abc123.mp4');
             done();
         });
     });
@@ -53,7 +59,17 @@ describe('Client should upoad a document test file to Manta', () => {
     it('client should upload testDoc.tst to server', (done) => {
         muploader(documentUpload, (res, uploadPath) => {
             expect(res).to.equal(true);
-            expect(uploadPath).to.equal('/uqamoon1/public/documents/abc234.txt');
+            expect(uploadPath).to.equal('~~/public/documents/abc234.txt');
+            done();
+        });
+    });
+});
+
+describe('Client should upoad a image test file to Manta', () => {
+    it('client should upload testImage.jpg to server', (done) => {
+        muploader(imageUpload, (res, uploadPath) => {
+            expect(res).to.equal(true);
+            expect(uploadPath).to.equal('~~/public/images/abc345.jpg');
             done();
         });
     });
