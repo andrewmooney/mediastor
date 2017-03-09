@@ -27,8 +27,7 @@ module.exports = (upload, callback) => {
         pdf: "document" 
     };
 
-    const filename = upload.filename,
-    fileId = upload._id,
+    const fileId = upload._id,
     localPath = upload.path,
     ext = upload.originalname.split('.').slice(-1)[0],
     basePath = '~~/public/',

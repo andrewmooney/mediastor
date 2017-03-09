@@ -1,3 +1,5 @@
+/*eslint-disable*/
+
 const mocha = require('mocha'),
       chai = require('chai'),
       assert = require('assert'),

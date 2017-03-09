@@ -17,6 +17,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
 // Connect to database (MongoDB)
+mongoose.Promise = global.Promise;
 mongoose.connect(`${dbConfig.host}/${dbConfig.database}`, {});
 const db = mongoose.connection;
 db.on('error', (err) => {
@@ -28,8 +29,6 @@ require('./routes/index')(app);
 require('./routes/videos')(app);
 require('./routes/images')(app);
 require('./routes/documents')(app);
-
-require('./routes/playlists')(app);
 
 const server = app.listen(serverConfig.port);
 

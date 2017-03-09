@@ -27,9 +27,12 @@
   },
   "scripts": {
     "start": "node index.js",
-    "test": "mocha --require ./tests/testHelper.js ./tests/ --timeout 12000"
+    "test": "mocha --require ./tests/testHelper.js ./tests/ --timeout 12000",
+    "lint": "eslint **/*.js"
   },
   "keywords": [
+    "Joyent",
+    "Manta",
     "Media",
     "Storage",
     "Document",

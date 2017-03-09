@@ -37,7 +37,7 @@ module.exports = (app) => {
      * Remove file from local uploads folder. 
      */
 
-    app.post('/', uploads.single('file'), (req, res, next) => {
+    app.post('/', uploads.single('file'), (req, res) => {
 
         const ext = req.file.originalname.split('.').slice(-1)[0],
             fileType = app.settings.types[ext],
@@ -79,7 +79,7 @@ module.exports = (app) => {
                     req.body.mediastorName = `${body.message._id}.${ext}`;
                     req.body.duration = duration;
                     req.body.fileLocation = uploadPath;
-                    request({ uri: `${uri}/${body.message._id}`, method: 'PATCH', json: req.body }, (err, htmlRes, body) => {
+                    request({ uri: `${uri}/${body.message._id}`, method: 'PATCH', json: req.body }, (err) => {
                         if (err) throw err;
                         deleteTempFile();
                         return res.status(200).json({ message: "File upload successful" });
