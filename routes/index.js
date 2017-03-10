@@ -75,10 +75,10 @@ module.exports = (app) => {
             console.log(req.file._id)
             muploader(req.file, (upres, uploadPath) => {
                 if (upres) {
-                    req.body.uploaded = upres;
                     req.body.mediastorName = `${body.message._id}.${ext}`;
                     req.body.duration = duration;
                     req.body.fileLocation = uploadPath;
+                    req.body.available = upres;
                     request({ uri: `${uri}/${body.message._id}`, method: 'PATCH', json: req.body }, (err) => {
                         if (err) throw err;
                         deleteTempFile();
