@@ -39,6 +39,8 @@ module.exports = (app) => {
 
     app.post('/', uploads.single('file'), (req, res) => {
 
+        console.log(req);
+
         const ext = req.file.originalname.split('.').slice(-1)[0],
             fileType = app.settings.types[ext],
             apiHost = app.settings.mediastorConfig.apiHost,
