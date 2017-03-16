@@ -5,7 +5,7 @@ const VideoSchema = new Schema({
         type: { type: String, required: true },
         name: { type: String, required: true },
         description: { type: String, required: true },
-        createdAt: { type: Date, required: true },
+        createdAt: { type: String, required: true },
         uploadedAt: { type: Date, default: Date.now },
         mediastorName: { type: String, required: false },
         uploadedBy: { type: String, required: false },

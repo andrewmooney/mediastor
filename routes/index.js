@@ -39,8 +39,6 @@ module.exports = (app) => {
 
     app.post('/', uploads.single('file'), (req, res) => {
 
-        console.log(req);
-
         const ext = req.file.originalname.split('.').slice(-1)[0],
             fileType = app.settings.types[ext],
             apiHost = app.settings.mediastorConfig.apiHost,
@@ -74,6 +72,7 @@ module.exports = (app) => {
         request({ uri: uri, method: 'POST', json: req.body }, (err, htmlRes, body) => {
             if (err) throw err;
             req.file._id = body.message._id;
+            console.log(body);
             console.log(req.file._id)
             muploader(req.file, (upres, uploadPath) => {
                 if (upres) {
@@ -84,7 +83,7 @@ module.exports = (app) => {
                     request({ uri: `${uri}/${body.message._id}`, method: 'PATCH', json: req.body }, (err) => {
                         if (err) throw err;
                         deleteTempFile();
-                        return res.status(200).json({ message: "File upload successful" });
+                        return res.status(200).json({ message: "File upload successful", mediastor_id: req.file._id });
                     });
                 };
             });
