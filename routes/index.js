@@ -83,7 +83,7 @@ module.exports = (app) => {
                     request({ uri: `${uri}/${body.message._id}`, method: 'PATCH', json: req.body }, (err) => {
                         if (err) throw err;
                         deleteTempFile();
-                        return res.status(200).json({ message: "File upload successful", mediastor_id: req.file._id });
+                        return res.status(200).json({ message: "File upload successful", mediastor_id: req.file._id, mediastor_name: req.body.mediastorName, mediastor_dur: req.body.duration, file_type: req.body.type });
                     });
                 };
             });
