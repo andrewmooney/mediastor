@@ -80,6 +80,7 @@ module.exports = (app) => {
                     req.body.duration = duration;
                     req.body.fileLocation = uploadPath;
                     req.body.available = upres;
+
                     request({ uri: `${uri}/${body.message._id}`, method: 'PATCH', json: req.body }, (err) => {
                         if (err) throw err;
                         deleteTempFile();
